@@ -1,8 +1,8 @@
 # Elephantdb Playground
 
-This project is meant to get up and running quickly with ElephantDB. It shows how to run ElephantDB locally, how to generate shards and how to fetch data from the repl.
+This project is meant to get up and running quickly with ElephantDB. It shows how to run ElephantDB locally, how to generate shards and how to fetch data in the repl.
 
-Note: all the command below assume you have Leiningen 2 installed
+Note: all the commands below assume you have [Leiningen 2](https://github.com/technomancy/leiningen) installed 
 
 ## Starting the database
 
@@ -39,3 +39,7 @@ I've added Thrift serialization to see how you can have flexible data types. To 
 
   cd data_gen
   lein run -m data.core/list ../data/domains/example
+
+## Deploying ElephantDB
+
+  See https://github.com/sritchie/elephantdb-deploy/pull/2
