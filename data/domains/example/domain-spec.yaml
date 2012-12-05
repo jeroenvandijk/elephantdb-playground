@@ -1,0 +1,6 @@
+--- 
+coordinator: elephantdb.persistence.JavaBerkDB
+persistence_opts: {}
+shard_count: 32
+shard_scheme: elephantdb.partition.HashModScheme
+kryo_pairs: []
