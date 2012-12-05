@@ -6,40 +6,40 @@ Note: all the commands below assume you have [Leiningen 2](https://github.com/te
 
 ## Starting the database
 
-  bin/serve
+    bin/serve
   
 This will get your local IP and write config files to the tmp directory in elephantdb_local
 
 ## Interacting with the database
 
-  bin/repl
+    bin/repl
 
 This will tell the repl what IP address should be used (can be overridden to interact with a remote server). Thry the following in the repl:
   
-  user=> (fetch-raw "example" "a")
-  #<Value Value(data:80 01 00 02 00 00 00 09 67 65 74 53 74 72 69 6E 67 00 00 00 01 0C 00 00 0B 00 01 00 00 00 10 0C 00 01 0A 00 01 00 00 00 00 00 00 00 01 00 00)>
+    user=> (fetch-raw "example" "a")
+    #<Value Value(data:80 01 00 02 00 00 00 09 67 65 74 53 74 72 69 6E 67 00 00 00 01 0C 00 00 0B 00 01 00 00 00 10 0C 00 01 0A 00 01 00 00 00 00 00 00 00 01 00 00)>
     
-  user=> (fetch "example" "a")
-  #<Value <Value count:Count(value:1)>>
+    user=> (fetch "example" "a")
+    #<Value <Value count:Count(value:1)>>
   
 ## Generate shards
 
 ElephantDB depends on shards generated from Hadoop. Look in the data_gen directory to see how this works. 
 I've added Thrift serialization to see how you can have flexible data types. To use the ElephantDB database you need to serialize the values to ByteArrays. Here is how you generate shards:
 
-  cd data_gen
-  lein run -m data.core/generate
+    cd data_gen
+    lein run -m data.core/generate
   
 ## List raw data in shards
 
-  cd data_gen
-  lein run -m data.core/list_raw ../data/domains/example
+    cd data_gen
+    lein run -m data.core/list_raw ../data/domains/example
   
 ## List data in shards
 
-  cd data_gen
-  lein run -m data.core/list ../data/domains/example
+    cd data_gen
+    lein run -m data.core/list ../data/domains/example
 
 ## Deploying ElephantDB
 
-  See https://github.com/sritchie/elephantdb-deploy/pull/2
+See https://github.com/sritchie/elephantdb-deploy/pull/2
