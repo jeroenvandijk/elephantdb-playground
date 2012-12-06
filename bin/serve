@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export ELEPHANTDB_IP=$(bin/ip)
+export ELEPHANTDB_IP=${ELEPHANTDB_IP:=$(bin/ip)}
 
 cd elephantdb_local
 echo "Cleaning tmp dir"
