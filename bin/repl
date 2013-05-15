@@ -1,8 +1,8 @@
 #!/bin/bash
-export ELEPHANTDB_IP=${ELEPHANTDB_IP:=$(bin/ip)}
+export ELEPHANTDB_HOST=${ELEPHANTDB_HOST:=$(bin/ip)}
 
-echo "Using ip address $ELEPHANTDB_IP to connect with ElephantDB"
+echo "Using $ELEPHANTDB_HOST as host to connect with ElephantDB"
 
-cd data_gen
+cd client
 
 lein repl
