@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd data_gen
+
+lein run -m data.core/generate
