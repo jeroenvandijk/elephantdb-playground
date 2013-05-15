@@ -1,16 +1,23 @@
 #!/bin/bash
 
-export ELEPHANTDB_IP=${ELEPHANTDB_IP:=$(bin/ip)}
+export ELEPHANTDB_HOST=${ELEPHANTDB_HOST:=$(bin/ip)}
 
-cd elephantdb_local
+echo "Checking for shards"
+if [ "$(ls -A data/domains 2> /dev/null)" == "" ]; then
+    # The directory is empty
+	echo "No shards detected, running shards generation script"
+	bin/shards
+fi
+
+cd server
 echo "Cleaning tmp dir"
 rm -rf ./tmp
 
 mkdir -p tmp
-sed -e "s/IP_ADDRESS/$ELEPHANTDB_IP/g" ../config/global_config.clj > tmp/global_config.clj
-sed -e "s/IP_ADDRESS/$ELEPHANTDB_IP/g" ../config/local_config.clj > tmp/local_config.clj
+sed -e "s/IP_ADDRESS/$ELEPHANTDB_HOST/g" ../config/global_config.clj > tmp/global_config.clj
+sed -e "s/IP_ADDRESS/$ELEPHANTDB_HOST/g" ../config/local_config.clj > tmp/local_config.clj
 
-echo "Launching ElephantDB at address $ELEPHANTDB_IP"
+echo "Launching ElephantDB at $ELEPHANTDB_HOST"
 
 echo "Starting server ..."
 lein run -m elephantdb.keyval.core tmp/global_config.clj tmp/local_config.clj

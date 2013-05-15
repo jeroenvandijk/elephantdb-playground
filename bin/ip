@@ -1,3 +1,9 @@
 #!/bin/bash
 
-ifconfig | grep 'inet ' | cut -d' '  -f2 | tail -n 1
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Using a java way of looking up the ip address is probably more reliable (although slower booting) than
+#
+#   ifconfig | grep 'inet ' | cut -d' '  -f2 | tail -n 1
+#
+echo $(cd $DIR/../util; lein run -m util.core/local-hostname)

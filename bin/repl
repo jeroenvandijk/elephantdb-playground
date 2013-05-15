@@ -1,5 +1,5 @@
 #!/bin/bash
-export ELEPHANTDB_HOST=${ELEPHANTDB_HOST:=$(bin/ip)}
+export ELEPHANTDB_HOST=${ELEPHANTDB_HOST:="localhost"}
 
 echo "Using $ELEPHANTDB_HOST as host to connect with ElephantDB"
 

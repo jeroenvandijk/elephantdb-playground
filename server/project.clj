@@ -9,9 +9,9 @@
              "-Xms1024M" "-Xmx1048M" "-server"]
 
   :dependencies [
-                 [org.clojure/clojure "1.4.0"]
-                 [elephantdb "0.2.0-wip4" :exclusions [commons-io]]
-                 [org.apache.hadoop/hadoop-core "0.20.2-dev" :exclusions [log4j commons-logging commons-codec]]
+                 [org.clojure/clojure "1.5.1"]
+                 [elephantdb/elephantdb-server "0.4.4"]
+                 [org.apache.hadoop/hadoop-core "0.20.2-dev" :exclusions [log4j commons-logging commons-codec org.slf4j/slf4j-api org.slf4j/slf4j-log4j12]]
                  
                  ;; Your libraries for deserialization...
                 ])
