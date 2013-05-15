@@ -1,4 +1,4 @@
-data/
+data/domains
 .lein-repl-history
 target/
 tmp/
