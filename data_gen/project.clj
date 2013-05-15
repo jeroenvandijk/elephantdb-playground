@@ -22,8 +22,6 @@
                  [cascalog "1.10.1"  :exclusions [cascalog/cascalog-elephantdb ]]
                  
                  [org.apache.thrift/libthrift "0.8.0"]
-                 
-                 #_[elephantdb "0.2.0-wip4" :exclusions [org.slf4j/slf4j-api org.slf4j/slf4j-log4j12]]
 
                  [org.apache.hadoop/hadoop-core "0.20.2-dev"]
                  ]
