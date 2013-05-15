@@ -14,10 +14,10 @@ This will get your local IP and write config files to the tmp directory in eleph
 
     bin/repl
 
-This will tell the repl what IP address should be used (can be overridden to interact with a remote server). Thry the following in the repl:
+This will tell the repl what IP address should be used (can be overridden to interact with a remote server). Try the following in the repl:
   
     user=> (fetch-raw "example" "a")
-    #<Value Value(data:80 01 00 02 00 00 00 09 67 65 74 53 74 72 69 6E 67 00 00 00 01 0C 00 00 0B 00 01 00 00 00 10 0C 00 01 0A 00 01 00 00 00 00 00 00 00 01 00 00)>
+    #<byte[] [B@5ef94934>
     
     user=> (fetch "example" "a")
     #<Value <Value count:Count(value:1)>>
@@ -27,6 +27,10 @@ This will tell the repl what IP address should be used (can be overridden to int
 ElephantDB depends on shards generated from Hadoop. Look in the data_gen directory to see how this works. 
 I've added Thrift serialization to see how you can have flexible data types. To use the ElephantDB database you need to serialize the values to ByteArrays. Here is how you generate shards:
 
+    bin/shards
+    
+Or
+    
     cd data_gen
     lein run -m data.core/generate
   
