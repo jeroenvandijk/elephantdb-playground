@@ -1,0 +1,5 @@
+data/
+.lein-repl-history
+target/
+tmp/
+.DS_Store
