@@ -1,4 +1,4 @@
-(ns user
+(ns client.core
   (:require [elephantdb.client :as c]
             [data.serialization :as s]
             [clojure.stacktrace]))

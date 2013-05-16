@@ -7,10 +7,10 @@
   ;; Necessary because we depend on the classes in data_gen. It would be
   ;; better if there was a shared lib with the deserialization functionality
   :source-paths ["src/clj"]
-  :test-paths ["test/clj"]
   :java-source-paths ["src/java"]
 
-  :repl-options { :init (repl-welcome-message) }
+  :repl-options { :init-ns client.core
+                  :init (do (in-ns 'client.core) (repl-welcome-message)) }
             
   :dependencies [
                  [org.clojure/clojure "1.5.1"]
