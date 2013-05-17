@@ -44,6 +44,31 @@ Or
     cd data_gen
     lein run -m data.core/list ../data/domains/example
 
+## Compatibility with 0.2.0
+Generate shards with 0.2.0
+
+    bin/shards_0_2_0
+
+Uncomment the line with these example shards in config/global_config.clj
+
+Do 
+    bin/serve
+    
+In another terminal
+
+    bin/repl
+
+And run the following commands
+
+    client.core=> (domains)
+    ["example" "example_0_2_0"]
+    client.core=> (fetch "example_0_2_0" "a")
+    nil
+    client.core=> (fetch "example" "a")
+    #<Value <Value count:Count(value:1)>>
+    client.core=>
+    
+
 ## Deploying ElephantDB
 
 See https://github.com/sritchie/elephantdb-deploy/pull/2
