@@ -8,7 +8,7 @@ Note: all the commands below assume you have [Leiningen 2](https://github.com/te
 
     bin/serve
   
-This will get your local IP and write config files to the tmp directory in elephantdb_local
+This will get your local IP and write config files to the tmp directory in ./server
 
 ## Interacting with the database
 
