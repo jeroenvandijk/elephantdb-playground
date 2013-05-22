@@ -48,6 +48,10 @@ Or
 Generate shards with 0.2.0
 
     bin/shards_0_2_0
+    
+Migrate these shards to 0.4.4
+
+    bin/shards_0_4_4
 
 Uncomment the line with these example shards in config/global_config.clj
 
@@ -63,12 +67,13 @@ And run the following commands
 
     client.core=> (domains)
     ["example" "example_0_2_0"]
-    client.core=> (fetch "example_0_2_0" "a")
-    nil
     client.core=> (fetch "example" "a")
     #<Value <Value count:Count(value:1)>>
+    client.core=> (fetch "example_0_2_0" "a")
+    nil
+    client.core=> (fetch "example_0_2_0_0_4_4" "a")
+    #<Value <Value count:Count(value:1)>>
     client.core=>
-    
 
 ## Deploying ElephantDB
 

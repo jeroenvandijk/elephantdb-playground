@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd data_gen_0_4_4
+
+lein run -m data.core/migrate
+
+# We need to fix the configuration manually
+cp ../data/domains/example/domain-spec.yaml ../data/domains/example_0_2_0_to_0_4_4/domain-spec.yaml
+rm ../data/domains/example_0_2_0_to_0_4_4/.domain-spec.yaml.crc
