@@ -7,7 +7,7 @@ import cascading.scheme.SourceCall;
 import cascading.tap.Tap;
 import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
-import elephantdb.DomainSpec;
+import elephantdb.NewDomainSpec;
 import elephantdb.Utils;
 import elephantdb.document.NewKeyValDocument;
 import elephantdb.hadoop.ElephantInputFormat;
@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public class NewElephantScheme extends Scheme<JobConf, RecordReader, OutputCollector, Object[], Object[]> {
 
-    public NewElephantScheme(Fields sourceFields, Fields sinkFields, DomainSpec spec) {
+    public NewElephantScheme(Fields sourceFields, Fields sinkFields, NewDomainSpec spec) {
         setSourceFields(sourceFields);
         setSinkFields(sinkFields);
     }

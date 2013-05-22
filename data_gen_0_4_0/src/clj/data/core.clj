@@ -13,6 +13,6 @@
 (defmain migrate [& args]
   (?- (new/keyval-tap "../data/domains/example_0_2_0_to_0_4_4" :spec { :num-shards 32 
                            :coordinator "elephantdb.persistence.NewJavaBerkDB" 
-                           :shard-scheme "elephantdb.partition.HashModScheme"})
+                           :shard-scheme "elephantdb.partition.NewHashModScheme"})
       (<- [!key !value]
         ((edb-tap) !key !value))))

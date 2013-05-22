@@ -1,6 +1,6 @@
 package elephantdb.store;
 
-import elephantdb.DomainSpec;
+import elephantdb.NewDomainSpec;
 import elephantdb.persistence.Persistence;
 import elephantdb.persistence.ShardSet;
 import elephantdb.persistence.ShardSetImpl;
@@ -13,43 +13,43 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class DomainStore {
+public class NewDomainStore {
     VersionedStore vs;
-    DomainSpec spec;
+    NewDomainSpec spec;
 
-    public DomainStore(FileSystem fs, String path) throws IOException {
+    public NewDomainStore(FileSystem fs, String path) throws IOException {
         this(new VersionedStore(fs, path), null, false);
     }
 
-    public DomainStore(FileSystem fs, String path, DomainSpec spec) throws IOException {
+    public NewDomainStore(FileSystem fs, String path, NewDomainSpec spec) throws IOException {
         this(new VersionedStore(fs, path), spec, false);
     }
 
-    public DomainStore(String path) throws IOException {
+    public NewDomainStore(String path) throws IOException {
         this(path, null);
     }
 
-    public DomainStore(String path, DomainSpec spec) throws IOException {
+    public NewDomainStore(String path, NewDomainSpec spec) throws IOException {
         this(new VersionedStore(path), spec, false);
     }
 
-    public DomainStore(String path, DomainSpec spec, boolean ignoreSpec) throws IOException {
+    public NewDomainStore(String path, NewDomainSpec spec, boolean ignoreSpec) throws IOException {
         this(new VersionedStore(path), spec, ignoreSpec);
     }
 
-    protected DomainStore(VersionedStore vs, DomainSpec spec, boolean ignoreSpec) throws IOException {
+    protected NewDomainStore(VersionedStore vs, NewDomainSpec spec, boolean ignoreSpec) throws IOException {
         this.vs = vs;
         String path = vs.getRoot();
         FileSystem fs = vs.getFileSystem();
-        if(DomainSpec.exists(fs, path) && !ignoreSpec) {
-            this.spec = DomainSpec.readFromFileSystem(fs, path);
+        if(NewDomainSpec.exists(fs, path) && !ignoreSpec) {
+            this.spec = NewDomainSpec.readFromFileSystem(fs, path);
 
             if(spec!=null && !this.spec.equals(spec)) {
                 throw new IllegalArgumentException(spec.toString() + " does not match existing " + this.spec.toString());
             }
         } else {
             if(spec == null) {
-                throw new IllegalArgumentException("You must supply a DomainSpec when creating a DomainStore.");
+                throw new IllegalArgumentException("You must supply a NewDomainSpec when creating a NewDomainStore.");
             } else {
                 this.spec = spec;
                 spec.writeToFileSystem(fs, path);
@@ -57,7 +57,7 @@ public class DomainStore {
         }
     }
 
-    public DomainSpec getSpec() {
+    public NewDomainSpec getSpec() {
         return spec;
     }
     
@@ -157,7 +157,7 @@ public class DomainStore {
         return vs.parseVersion(path);
     }
 
-    public static void synchronizeVersions(FileSystem fs, DomainSpec spec, String oldv, String newv) throws IOException {
+    public static void synchronizeVersions(FileSystem fs, NewDomainSpec spec, String oldv, String newv) throws IOException {
         // TODO: might want to do a distcp here if the files are large
         // kept simple here for now since large domains implies large updates which will hit every shard
         if(oldv!=null) {

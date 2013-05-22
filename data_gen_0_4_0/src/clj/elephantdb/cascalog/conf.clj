@@ -1,6 +1,6 @@
 (ns elephantdb.cascalog.conf
   (:require [cascalog.workflow :as w])
-  (:import [elephantdb DomainSpec DomainSpec$Args]
+  (:import [elephantdb NewDomainSpec NewDomainSpec$Args]
            [elephantdb.cascading NewElephantDBTap$Args]
            [java.util ArrayList HashMap]))
 
@@ -8,10 +8,10 @@
   [{:keys [coordinator shard-scheme num-shards persistence-options]}]
   {:pre [(and coordinator shard-scheme num-shards)]}
   (if persistence-options
-    (let [args (DomainSpec$Args.)]
+    (let [args (NewDomainSpec$Args.)]
       (set! (.persistenceOptions args) (HashMap. persistence-options))
-      (DomainSpec. coordinator shard-scheme num-shards args))
-    (DomainSpec. coordinator shard-scheme num-shards)))
+      (NewDomainSpec. coordinator shard-scheme num-shards args))
+    (NewDomainSpec. coordinator shard-scheme num-shards)))
 
 (defn convert-args
   [{:keys [tmp-dirs source-fields

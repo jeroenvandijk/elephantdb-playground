@@ -1,6 +1,6 @@
 package elephantdb.hadoop;
 
-import elephantdb.DomainSpec;
+import elephantdb.NewDomainSpec;
 import elephantdb.Utils;
 import elephantdb.persistence.Coordinator;
 import elephantdb.persistence.Persistence;
@@ -26,12 +26,12 @@ public class ElephantOutputFormat implements OutputFormat<IntWritable, ElephantR
 
     // This gets serialized in via the conf.
     public static class Args implements Serializable {
-        public DomainSpec spec;
+        public NewDomainSpec spec;
 
         // Path to a version inside of a versioned store, perhaps?
         public String outputDirHdfs;
 
-        public Args(DomainSpec spec, String outputDirHdfs) {
+        public Args(NewDomainSpec spec, String outputDirHdfs) {
             this.spec = spec;
             this.outputDirHdfs = outputDirHdfs;
         }

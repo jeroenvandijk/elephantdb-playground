@@ -7,12 +7,12 @@ import cascading.tap.Tap;
 import cascading.tap.TapException;
 import cascading.tap.hadoop.Hfs;
 import cascading.tuple.Fields;
-import elephantdb.DomainSpec;
+import elephantdb.NewDomainSpec;
 import elephantdb.Utils;
 import elephantdb.hadoop.ElephantInputFormat;
 import elephantdb.hadoop.ElephantOutputFormat;
 import elephantdb.hadoop.LocalElephantManager;
-import elephantdb.store.DomainStore;
+import elephantdb.store.NewDomainStore;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.FileStatus;
@@ -45,15 +45,15 @@ public class NewElephantDBTap extends Hfs {
     }
 
     String domainDir;
-    DomainSpec spec;
+    NewDomainSpec spec;
     Args args;
     String newVersionPath;
     TapMode mode;
 
-    public NewElephantDBTap(String dir, DomainSpec spec, Args args, TapMode mode, boolean ignoreSpec) throws IOException {
+    public NewElephantDBTap(String dir, NewDomainSpec spec, Args args, TapMode mode, boolean ignoreSpec) throws IOException {
         domainDir = dir;
         this.args = args;
-        this.spec = new DomainStore(dir, spec, ignoreSpec).getSpec();
+        this.spec = new NewDomainStore(dir, spec, ignoreSpec).getSpec();
         this.mode = mode;
 
         setStringPath(domainDir);
@@ -61,11 +61,11 @@ public class NewElephantDBTap extends Hfs {
             this.args.sinkFields, this.spec));
     }
 
-    public DomainStore getDomainStore() throws IOException {
-        return new DomainStore(domainDir, spec);
+    public NewDomainStore getNewDomainStore() throws IOException {
+        return new NewDomainStore(domainDir, spec);
     }
 
-    public DomainSpec getSpec() {
+    public NewDomainSpec getSpec() {
         return spec;
     }
 
@@ -105,7 +105,7 @@ public class NewElephantDBTap extends Hfs {
     }
 
     public ElephantOutputFormat.Args outputArgs(JobConf conf) throws IOException {
-        DomainStore dstore = getDomainStore();
+        NewDomainStore dstore = getNewDomainStore();
         FileSystem fs = dstore.getFileSystem();
 
         if (newVersionPath == null) { //working around cascading calling sinkinit twice
@@ -129,7 +129,7 @@ public class NewElephantDBTap extends Hfs {
     
     @Override
     public long getModifiedTime(JobConf conf) throws IOException {
-        DomainStore dstore = getDomainStore();
+        NewDomainStore dstore = getNewDomainStore();
         return (mode == TapMode.SINK) ? 0 : dstore.mostRecentVersion();
     }
 
@@ -137,7 +137,7 @@ public class NewElephantDBTap extends Hfs {
     public String getIdentifier() {
         String versionString = "";
         try {
-            DomainStore dstore = getDomainStore();
+            NewDomainStore dstore = getNewDomainStore();
             versionString = ((mode == TapMode.SINK) ? "LATEST" : "" + dstore.mostRecentVersion());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -159,7 +159,7 @@ public class NewElephantDBTap extends Hfs {
 
     @Override public boolean commitResource(JobConf conf) {
         try {
-            DomainStore dstore = getDomainStore();
+            NewDomainStore dstore = getNewDomainStore();
             dstore.getFileSystem().mkdirs(new Path(newVersionPath));
             
             dstore.succeedVersion(newVersionPath);
@@ -174,7 +174,7 @@ public class NewElephantDBTap extends Hfs {
     }
     
     @Override public boolean rollbackResource(JobConf conf) throws IOException {
-        DomainStore dstore = getDomainStore();
+        NewDomainStore dstore = getNewDomainStore();
         dstore.failVersion(newVersionPath);        
         
         return true;
