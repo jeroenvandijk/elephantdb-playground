@@ -52,6 +52,7 @@ Generate shards with 0.2.0
 Uncomment the line with these example shards in config/global_config.clj
 
 Do 
+    
     bin/serve
     
 In another terminal
