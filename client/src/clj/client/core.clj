@@ -84,7 +84,7 @@
       (println "Or, if you are not sure check again with run `(usage-instructions)` here to continue"))))
 
 (defn server-instructions []
-  (println "You are not connected to an ElephantDB server!")
+  (println (str "You are not connected to an ElephantDB server! Are you sure it is running on " elephantdb-host "?"))
   (println)
   (println "Start the server with `bin/repl` from the root of this project.")
   (println)
